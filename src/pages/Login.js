@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import saveEmail from '../redux/actions';
 
 class Login extends React.Component {
@@ -37,7 +38,7 @@ class Login extends React.Component {
     const { email } = this.state;
     const action = { type: 'SAVE_EMAIL',
       payload: { email } };
-    window.location.pathname = '/carteira';
+    // window.location.pathname = '/carteira';
     props.dispatch(action);
     // saveEmail(email);
   };
@@ -62,13 +63,15 @@ class Login extends React.Component {
             data-testid="password-input"
             onChange={ this.onInputChange }
           />
-          <button
-            type="button"
-            disabled={ isDisabled }
-            onClick={ this.onClickButton }
-          >
-            Entrar
-          </button>
+          <Link to="/carteira">
+            <button
+              type="button"
+              disabled={ isDisabled }
+              onClick={ this.onClickButton }
+            >
+              Entrar
+            </button>
+          </Link>
         </form>
       </div>
     );
