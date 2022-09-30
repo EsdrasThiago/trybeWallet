@@ -1,10 +1,16 @@
 import React from 'react';
-import store from '../redux/store';
+import Header from '../components/Header';
+import WalletForm from '../components/WalletForm';
 
 class Wallet extends React.Component {
   render() {
-    console.log(store.getState());
-    return <div>TrybeWallet</div>;
+    return (
+      <div>
+        <Header />
+        <div>TrybeWallet</div>
+        <WalletForm />
+      </div>
+    );
   }
 }
 

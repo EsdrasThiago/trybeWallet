@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import saveEmail from '../redux/actions';
+import { saveEmail } from '../redux/actions/index';
 
 class Login extends React.Component {
   state = {
@@ -34,13 +34,9 @@ class Login extends React.Component {
   };
 
   onClickButton = () => {
-    const { props } = this;
+    const { dispatch } = this.props;
     const { email } = this.state;
-    const action = { type: 'SAVE_EMAIL',
-      payload: { email } };
-    // window.location.pathname = '/carteira';
-    props.dispatch(action);
-    // saveEmail(email);
+    dispatch(saveEmail(email));
   };
 
   render() {
@@ -80,8 +76,4 @@ class Login extends React.Component {
 Login.propTypes = {
 }.isRequired;
 
-function mapStateToProps(state) {
-  return state.user;
-}
-
-export default connect(mapStateToProps)(Login);
+export default connect()(Login);
