@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   sumFunction = () => {
@@ -25,11 +26,13 @@ class Header extends Component {
   }
 }
 
+Header.propTypes = {
+  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  wallet: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
 function mapStateToProps(state) {
   return state;
 }
-
-Header.propTypes = {
-}.isRequired;
 
 export default connect(mapStateToProps)(Header);

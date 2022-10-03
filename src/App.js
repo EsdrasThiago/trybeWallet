@@ -18,7 +18,4 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-}.isRequired;
-
 export default connect()(App);

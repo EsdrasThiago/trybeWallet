@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { saveEmail, requestApi } from '../redux/actions/index';
 
 class Login extends React.Component {
@@ -79,7 +80,9 @@ class Login extends React.Component {
     );
   }
 }
+
 Login.propTypes = {
-}.isRequired;
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(Login);
