@@ -18,8 +18,7 @@ class Login extends React.Component {
   }
 
   onInputChange = ({ target }) => {
-    const { name, type } = target;
-    const value = type === 'checkbox' ? target.checked : target.value;
+    const { name, value } = target;
     this.setState({
       [name]: value,
     }, () => this.disableButton());
