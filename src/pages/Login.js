@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { saveEmail } from '../redux/actions/index';
+import { saveEmail, requestApi } from '../redux/actions/index';
 
 class Login extends React.Component {
   state = {
@@ -9,6 +9,12 @@ class Login extends React.Component {
     password: '',
     isDisabled: true,
   };
+
+  componentDidMount() {
+    // this.getConversion();
+    const { dispatch } = this.props;
+    dispatch(requestApi('login'));
+  }
 
   onInputChange = ({ target }) => {
     const { name, type } = target;

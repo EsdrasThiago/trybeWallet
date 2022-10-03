@@ -12,7 +12,10 @@ export const requestApi = (local) => async (dispatch) => {
   const data = await fetch(endpoint);
   const cambio = await data.json();
   delete cambio.USDT;
-  if (local === 'app') {
-    dispatch(economyApi(cambio));
+  const cambioArray = (Object.keys(cambio));
+  if (local === 'login') {
+    dispatch(economyApi(cambioArray));
+  } if (local === 'wallet') {
+    return cambio;
   }
 };

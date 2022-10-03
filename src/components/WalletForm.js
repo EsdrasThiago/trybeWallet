@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { expensivesEconomy } from '../redux/actions';
+import { expensivesEconomy, requestApi } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -10,37 +10,34 @@ class WalletForm extends Component {
     description: '',
     tag: 'Alimentação',
     method: 'Dinheiro',
-    moeda: 'USD',
-    exchangeRates: [],
+    currency: 'USD',
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { currencies } = this.props;
     this.setState({
-      exchangeRates: currencies,
-    });
-    const cambioArray = (Object.keys(currencies));
-    this.setState({
-      currenciesArray: [...cambioArray],
+      currenciesArray: [...currencies],
     });
   }
 
-  expenseAdd = () => {
+  expenseAdd = async () => {
     const {
       id,
       tag,
       method,
-      moeda,
+      currency,
       value,
       description,
-      exchangeRates,
     } = this.state;
     const { dispatch } = this.props;
+    const exchangeRates = await dispatch(requestApi('wallet'));
     let idNumber = id;
-    const expensives = { id, value, method, tag, moeda, description, exchangeRates };
+    const expensives = { id, value, method, tag, currency, description, exchangeRates };
     dispatch(expensivesEconomy(expensives));
     this.setState({
       id: idNumber += 1,
+      description: '',
+      value: '',
     });
   };
 
@@ -57,7 +54,7 @@ class WalletForm extends Component {
       currenciesArray,
       tag,
       method,
-      moeda,
+      currency,
       value,
       description,
     } = this.state;
@@ -84,8 +81,8 @@ class WalletForm extends Component {
           <select
             id="currency-input"
             data-testid="currency-input"
-            name="moeda"
-            value={ moeda }
+            name="currency"
+            value={ currency }
             onChange={ this.onInputChange }
           >
             {currenciesArray.map((element) => (
