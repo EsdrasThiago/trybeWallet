@@ -1,34 +1,95 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { expensivesEconomy } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
     currenciesArray: [],
+    id: 0,
+    value: '',
+    description: '',
+    tag: 'Alimentação',
+    method: 'Dinheiro',
+    moeda: 'USD',
+    exchangeRates: [],
   };
 
   componentDidMount() {
     const { currencies } = this.props;
     this.setState({
-      currenciesArray: [...currencies],
+      exchangeRates: currencies,
+    });
+    const cambioArray = (Object.keys(currencies));
+    this.setState({
+      currenciesArray: [...cambioArray],
     });
   }
 
+  expenseAdd = () => {
+    const {
+      id,
+      tag,
+      method,
+      moeda,
+      value,
+      description,
+      exchangeRates,
+    } = this.state;
+    const { dispatch } = this.props;
+    let idNumber = id;
+    const expensives = { id, value, method, tag, moeda, description, exchangeRates };
+    dispatch(expensivesEconomy(expensives));
+    this.setState({
+      id: idNumber += 1,
+    });
+  };
+
+  onInputChange = ({ target }) => {
+    const { name, type } = target;
+    const value = type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   render() {
-    const { currenciesArray } = this.state;
+    const {
+      currenciesArray,
+      tag,
+      method,
+      moeda,
+      value,
+      description,
+    } = this.state;
     return (
       <form>
         Despesas:
-        <input type="text" data-testid="value-input" />
+        <input
+          type="text"
+          data-testid="value-input"
+          name="value"
+          value={ value }
+          onChange={ this.onInputChange }
+        />
         Sobre:
-        <input type="text" data-testid="description-input" />
+        <input
+          type="text"
+          data-testid="description-input"
+          name="description"
+          value={ description }
+          onChange={ this.onInputChange }
+        />
         <label htmlFor="currency-input">
           Escolha:
           <select
             id="currency-input"
             data-testid="currency-input"
+            name="moeda"
+            value={ moeda }
+            onChange={ this.onInputChange }
           >
             {currenciesArray.map((element) => (
-              <option key={ element } value="moeda">{element}</option>
+              <option key={ element } value={ element }>{element}</option>
             ))}
           </select>
         </label>
@@ -37,10 +98,13 @@ class WalletForm extends Component {
           <select
             id="method-input"
             data-testid="method-input"
+            name="method"
+            value={ method }
+            onChange={ this.onInputChange }
           >
-            <option value="method">Dinheiro</option>
-            <option value="method">Cartão de crédito</option>
-            <option value="method">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag-input">
@@ -48,14 +112,23 @@ class WalletForm extends Component {
           <select
             id="tag-input"
             data-testid="tag-input"
+            value={ tag }
+            onChange={ this.onInputChange }
+            name="tag"
           >
-            <option value="motivo">Alimentação</option>
-            <option value="motivo">Lazer</option>
-            <option value="motivo">Trabalho</option>
-            <option value="motivo">Transporte</option>
-            <option value="motivo">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
+        <button
+          type="button"
+          onClick={ this.expenseAdd }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }

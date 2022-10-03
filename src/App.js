@@ -10,7 +10,7 @@ class App extends React.Component {
   componentDidMount() {
     // this.getConversion();
     const { dispatch } = this.props;
-    dispatch(requestApi());
+    dispatch(requestApi('app'));
   }
 
   render() {

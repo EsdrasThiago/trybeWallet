@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { MapStateToProps } from 'react-redux';
 
 class Header extends Component {
   state = {
@@ -8,7 +7,8 @@ class Header extends Component {
   };
 
   render() {
-    const { email } = this.props;
+    const { props } = this;
+    const { email } = props.user;
     const { total } = this.state;
     return (
       <div>
@@ -21,7 +21,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return state.user;
+  return state;
 }
 
 Header.propTypes = {
