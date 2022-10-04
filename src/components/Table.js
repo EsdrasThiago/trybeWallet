@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Table extends Component {
+  clickButton = () => {
+
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -56,6 +60,13 @@ class Table extends Component {
                   .toFixed(2)}
               </td>
               <td>Real</td>
+              <button
+                type="button"
+                data-testid="delete-btn"
+                onClick={ this.clickButton(e) }
+              >
+                X
+              </button>
             </tr>
           </tbody>
         ))}
