@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 // import { INITIAL_STATE } from './user';
 
-import { ECONOMY_API, EXPENSIVES_ECONOMY } from '../actions';
+import { DELETE_ECONOMY, ECONOMY_API, EXPENSIVES_ECONOMY } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 
 function wallet(state = INITIAL_STATE, action) {
   const { payload } = action;
+  console.log(payload);
   switch (action.type) {
   case ECONOMY_API:
     return { ...state, currencies: payload };
@@ -17,6 +18,9 @@ function wallet(state = INITIAL_STATE, action) {
     return { ...state,
       expenses: [...state.expenses, payload],
     };
+  case DELETE_ECONOMY:
+    return { ...state,
+      expenses: payload };
   default:
     return state;
   }
