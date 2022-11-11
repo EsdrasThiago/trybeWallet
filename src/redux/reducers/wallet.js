@@ -10,7 +10,6 @@ const INITIAL_STATE = {
 
 function wallet(state = INITIAL_STATE, action) {
   const { payload } = action;
-  console.log(payload);
   switch (action.type) {
   case ECONOMY_API:
     return { ...state, currencies: payload };

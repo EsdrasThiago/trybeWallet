@@ -57,6 +57,7 @@ class Login extends React.Component {
             name="email"
             data-testid="email-input"
             onChange={ this.onInputChange }
+            autoComplete="off"
           />
           Senha:
           <input
@@ -64,6 +65,7 @@ class Login extends React.Component {
             name="password"
             data-testid="password-input"
             onChange={ this.onInputChange }
+            autoComplete="off"
           />
           <Link to="/carteira">
             <button

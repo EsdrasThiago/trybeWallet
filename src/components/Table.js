@@ -6,20 +6,16 @@ import { deleteEconomy } from '../redux/actions';
 class Table extends Component {
   clickButton = ({ target }) => {
     const { expenses, dispatch } = this.props;
-    console.log(target);
     const newTable = expenses.filter((e) => e.id !== Number(target.name));
-    console.log(newTable);
     dispatch(deleteEconomy(newTable));
   };
 
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
     return (
       <table>
         <thead>
           <tr>
-
             <th>
               Descrição
             </th>
