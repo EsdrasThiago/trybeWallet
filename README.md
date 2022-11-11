@@ -2,7 +2,7 @@
 
 <h2>Oque é o TrybeWallet?</h2>
 
-O TrybeWallet é um projeto cujo objetivo é ser um criador de cartas simples e facil de usar.
+O TrybeWallet é um projeto cujo objetivo é ser uma tabela onde são armazenadas as despesas do usuario.
 
 <h2>Sobre o TrybeWallet</h2>
 
